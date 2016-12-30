@@ -1,7 +1,7 @@
 <style lang="sass">
-  @import '~bootstrap/scss/bootstrap';
-
   $enable-flex: true;
+
+  @import '~bootstrap/scss/bootstrap';
 </style>
 
 <template>
@@ -10,7 +10,7 @@
       <Navigation></Navigation>
     </header>
 
-    <div class="container-fluid">
+    <div class="container">
       <router-view></router-view>
     </div>
   </div>

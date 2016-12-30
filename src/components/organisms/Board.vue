@@ -1,15 +1,22 @@
 <style scoped>
 .Board {
+	border: 1px solid black;
 }
 </style>
 
 <template>
   <div>
-    <Field
-      v-for="(field, fieldId) in fields"
-      :player="field"
-      @click.prevent="selectField(fieldId)"
-    />
+    <div class="Board row">
+      <Field
+        v-for="(field, fieldId) in fields"
+        :player="field"
+        @click.prevent="selectField(fieldId)"
+        />
+      </div>
+
+    <div>
+      The winner is: {{ winner || 'undefined' }}
+    </div>
   </div>
 </template>
 
@@ -24,6 +31,14 @@
     computed: {
       fields() {
         return this.$store.state.fields;
+      },
+
+      winner() {
+        if (typeof this.$store.getters.winner === 'number') {
+          return `Player ${this.$store.getters.winner}`;
+        }
+
+        return false;
       },
     },
 

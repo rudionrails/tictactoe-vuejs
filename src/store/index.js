@@ -22,7 +22,6 @@ function isWinner(player) {
   return WINNER_FIELDS.some(win => player === win);
 }
 
-/* eslint-disable no-console */
 /* eslint-disable no-new */
 export default new Vuex.Store({
   state: {
@@ -46,7 +45,7 @@ export default new Vuex.Store({
     /**
     * The winning player
     *
-    * @returns [undefined, 0, 1] The id of the winner of undefined
+    * @returns [undefined, 0, 1] The id of the winner or undefined
     */
     winner(state) {
       return [0, 1].find(playerId => isWinner(state.players[playerId]));
@@ -58,6 +57,13 @@ export default new Vuex.Store({
     * Select the current player on the provided field
     */
     selectField(state, fieldId) {
+      /* eslint-disable no-bitwise */
+      const matrix = state.players[state.currentPlayerId] | Math.pow(2, fieldId);
+
+      // update the current player matrix
+      set(state.players, state.currentPlayerId, matrix);
+
+      // set the field
       set(state.fields, fieldId, state.currentPlayerId);
     },
 
@@ -74,16 +80,10 @@ export default new Vuex.Store({
     * Select a field and pass the current player
     */
     selectField({ commit, state }, fieldId) {
-      console.log(`player: ${state.currentPlayerId}`);
-
       if (state.fields[fieldId] !== undefined) return;
 
       commit('selectField', fieldId);
       commit('switchPlayer');
-
-      console.log(state.fields);
-      console.log(`next player: ${state.currentPlayerId}`);
-      console.log(`winner: ${state.winner}`);
     },
   },
 });
