@@ -1,12 +1,6 @@
-<style scoped>
-.Board {
-	border: 1px solid black;
-}
-</style>
-
 <template>
   <div>
-    <div class="Board row">
+    <div class="Board">
       <Field
         v-for="(field, fieldId) in fields"
         :player="field"

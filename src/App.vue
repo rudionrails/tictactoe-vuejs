@@ -1,27 +1,15 @@
-<style lang="sass">
-  $enable-flex: true;
-
-  @import '~bootstrap/scss/bootstrap';
-</style>
-
 <template>
   <div>
     <header>
-      <Navigation></Navigation>
+      TicTacToe
     </header>
 
-    <div class="container">
+    <div id="main">
       <router-view></router-view>
     </div>
+
+    <footer>
+      &copy; Rudolf Schmidt
+    </footer>
   </div>
 </template>
-
-<script>
-  import Navigation from './components/organisms/Navigation';
-
-  export default {
-    components: {
-      Navigation,
-    },
-  };
-</script>
