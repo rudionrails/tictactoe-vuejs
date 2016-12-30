@@ -1,28 +1,27 @@
+<style lang="sass">
+  @import '~bootstrap/scss/bootstrap';
+
+  $enable-flex: true;
+</style>
+
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+  <div>
+    <header>
+      <Navigation></Navigation>
+    </header>
+
+    <div class="container-fluid">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+  import Navigation from './components/organisms/Navigation';
 
-export default {
-  name: 'app',
-  components: {
-    Hello,
-  },
-};
+  export default {
+    components: {
+      Navigation,
+    },
+  };
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
