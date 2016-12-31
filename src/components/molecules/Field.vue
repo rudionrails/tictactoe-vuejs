@@ -2,7 +2,8 @@
   <div
     class="Field"
     :class="cssClass"
-    @click="$emit('click', $event)">
+    @click="$emit('click', $event)"
+  >
   </div>
 </template>
 
@@ -21,8 +22,6 @@
 
         if (typeof this.selected === 'number') {
           list.push(`is-player-${this.selected}`);
-        } else {
-          list.push('pulsate');
         }
 
         return list;
@@ -41,20 +40,15 @@
   transform: scale(.95, .95);
   background: #333;
 
-  &:hover {
+  &:hover:not(.is-player-0, .is-player-1) {
     animation: pulsate infinite .8s ease-in-out;
   }
 
-  &.is-selected {
+  &.is-player {
     transform: scale(.9, .9);
-  }
 
-  &.is-player-0 {
-    background: #64CEAA;
-  }
-
-  &.is-player-1 {
-    background: #FD6C6C;
+    &-0 { background: #64CEAA; }
+    &-1 { background: #FD6C6C; }
   }
 }
 

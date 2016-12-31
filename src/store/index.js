@@ -24,7 +24,8 @@ const WINNER_FIELDS = [
 ];
 
 function isWinner(player) {
-  return WINNER_FIELDS.some(win => player === win);
+  /* eslint-disable no-bitwise */
+  return WINNER_FIELDS.some(win => (player & win) === win);
 }
 
 /* eslint-disable no-new */
@@ -34,7 +35,7 @@ export default new Vuex.Store({
     players: Array(2).fill(EMPTY_FIELD),
 
     // The current player
-    currentPlayerId: 0,
+    current: 0,
 
     // The game fields
     fields: Array(9).fill(),
@@ -57,20 +58,20 @@ export default new Vuex.Store({
     */
     selectField(state, fieldId) {
       /* eslint-disable no-bitwise */
-      const matrix = state.players[state.currentPlayerId] | Math.pow(2, fieldId);
+      const matrix = state.players[state.current] | Math.pow(2, fieldId);
 
       // update the current player matrix
-      set(state.players, state.currentPlayerId, matrix);
+      set(state.players, state.current, matrix);
 
       // set the field
-      set(state.fields, fieldId, state.currentPlayerId);
+      set(state.fields, fieldId, state.current);
     },
 
     /**
     * Switch the current player
     */
     switchPlayer(state) {
-      set(state, 'currentPlayerId', Math.abs(state.currentPlayerId - 1));
+      set(state, 'current', Math.abs(state.current - 1));
     },
   },
 
