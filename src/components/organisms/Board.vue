@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="Board">
-      <Field
-        v-for="(field, fieldId) in fields"
-        :player="field"
-        @click.prevent="selectField(fieldId)"
-        />
-      </div>
+  <div class="Board">
+    <Field
+      v-for="(selected, id) in fields"
+      :selected="selected"
+      @click="selectField(id)"
+    />
 
     <div>
       The winner is: {{ winner || 'undefined' }}
@@ -43,3 +41,10 @@
     },
   };
 </script>
+
+<style scoped>
+.Board {
+  width: 100%;
+  height: 100%;
+}
+</style>

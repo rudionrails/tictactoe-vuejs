@@ -8,12 +8,17 @@ Vue.use(Vuex);
 */
 const EMPTY_FIELD = 0b000000000;
 const WINNER_FIELDS = [
-  0b111000000,
-  0b000111000,
+  // horizontal
   0b000000111,
-  0b100100100,
-  0b010010010,
+  0b000111000,
+  0b111000000,
+
+  // vertical
   0b001001001,
+  0b010010010,
+  0b100100100,
+
+  // diagonal
   0b100010001,
   0b001010100,
 ];
@@ -25,19 +30,13 @@ function isWinner(player) {
 /* eslint-disable no-new */
 export default new Vuex.Store({
   state: {
-    /**
-    * The players
-    */
+    // The players
     players: Array(2).fill(EMPTY_FIELD),
 
-    /**
-    * The current player
-    */
+    // The current player
     currentPlayerId: 0,
 
-    /**
-    * The game fields
-    */
+    // The game fields
     fields: Array(9).fill(),
   },
 
