@@ -23,10 +23,20 @@ const WINNER_FIELDS = [
   0b001010100,
 ];
 
+/**
+* Is the provided player bit a winner match
+*/
 function isWinner(player) {
   /* eslint-disable no-bitwise */
   return WINNER_FIELDS.some(win => (player & win) === win);
 }
+
+/**
+* Is every field taken
+*/
+// function isAllTaken(fields) {
+//   return fields.every(field => typeof field === 'number');
+// }
 
 /* eslint-disable no-new */
 export default new Vuex.Store({
@@ -49,6 +59,27 @@ export default new Vuex.Store({
     */
     winner(state) {
       return [0, 1].find(playerId => isWinner(state.players[playerId]));
+    },
+
+    /**
+    * If store has a winner
+    *
+    * @returns [Booleam] true or false
+    */
+    isWinnerPresent(_, getters) {
+      return typeof getters.winner === 'number';
+    },
+
+    /**
+    * Returns true when winner or all fields taken
+    *
+    * @returns [Boolean] true or false
+    */
+    isGameOver(state, getters) {
+      const isAllTaken = state.fields.every(field => typeof field === 'number');
+      const isWinnerPresent = typeof getters.winner === 'number';
+
+      return isAllTaken || isWinnerPresent;
     },
   },
 
@@ -73,17 +104,30 @@ export default new Vuex.Store({
     switchPlayer(state) {
       set(state, 'current', Math.abs(state.current - 1));
     },
+
+    /**
+    * Sets all fields to the winner id
+    */
+    setWinner(state, playerId) {
+      state.fields.fill(playerId);
+    },
   },
 
   actions: {
     /**
     * Select a field and pass the current player
     */
-    selectField({ commit, state }, fieldId) {
+    selectField({ commit, state, getters }, fieldId) {
+      if (getters.isGameOver) return;
       if (state.fields[fieldId] !== undefined) return;
 
       commit('selectField', fieldId);
-      commit('switchPlayer');
+
+      if (getters.isWinnerPresent) {
+        commit('setWinner', state.current);
+      } else {
+        commit('switchPlayer');
+      }
     },
   },
 });
