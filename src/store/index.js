@@ -24,23 +24,10 @@ const WINNER_FIELDS = [
 ];
 
 /**
-* Is the provided player bit a winner match
+* Returns blank state
 */
-function isWinner(player) {
-  /* eslint-disable no-bitwise */
-  return WINNER_FIELDS.some(win => (player & win) === win);
-}
-
-/**
-* Is every field taken
-*/
-// function isAllTaken(fields) {
-//   return fields.every(field => typeof field === 'number');
-// }
-
-/* eslint-disable no-new */
-export default new Vuex.Store({
-  state: {
+function reset() {
+  return {
     // The players
     players: Array(2).fill(EMPTY_FIELD),
 
@@ -49,7 +36,27 @@ export default new Vuex.Store({
 
     // The game fields
     fields: Array(9).fill(),
-  },
+  };
+}
+
+/**
+* Is the provided player bit a winner match
+*/
+function isWinner(player) {
+  /* eslint-disable no-bitwise */
+  return WINNER_FIELDS.some(win => (player & win) === win);
+}
+
+/**
+* Is the field already taken
+*/
+function isTaken(field) {
+  return field !== undefined;
+}
+
+/* eslint-disable no-new */
+export default new Vuex.Store({
+  state: reset(),
 
   getters: {
     /**
@@ -76,10 +83,9 @@ export default new Vuex.Store({
     * @returns [Boolean] true or false
     */
     isGameOver(state, getters) {
-      const isAllTaken = state.fields.every(field => typeof field === 'number');
-      const isWinnerPresent = typeof getters.winner === 'number';
+      const isAllTaken = state.fields.every(field => isTaken(field));
 
-      return isAllTaken || isWinnerPresent;
+      return isAllTaken || getters.isWinnerPresent;
     },
   },
 
@@ -108,9 +114,7 @@ export default new Vuex.Store({
     /**
     * Sets all fields to the winner id
     */
-    setWinner(state, playerId) {
-      state.fields.fill(playerId);
-    },
+    setWinner: (state, playerId) => state.fields.fill(playerId),
   },
 
   actions: {
@@ -118,8 +122,7 @@ export default new Vuex.Store({
     * Select a field and pass the current player
     */
     selectField({ commit, state, getters }, fieldId) {
-      if (getters.isGameOver) return;
-      if (state.fields[fieldId] !== undefined) return;
+      if (getters.isGameOver || isTaken(state.fields[fieldId])) return;
 
       commit('selectField', fieldId);
 
@@ -128,6 +131,16 @@ export default new Vuex.Store({
       } else {
         commit('switchPlayer');
       }
+    },
+
+    /**
+    * Reset the board
+    */
+    reset({ commit, state }) {
+      set(state, 'players', Array(2).fill(EMPTY_FIELD));
+      set(state, 'fields', Array(9).fill());
+
+      commit('switchPlayer');
     },
   },
 });

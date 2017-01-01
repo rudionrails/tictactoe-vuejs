@@ -8,6 +8,13 @@
       :selected="selected"
       @click="selectField(id)"
     />
+
+    <div
+      class="Board__reset"
+      v-if="isGameOver"
+      @click="reset"
+    >
+    </div>
   </div>
 </template>
 
@@ -33,11 +40,19 @@
       fields() {
         return this.$store.state.fields;
       },
+
+      isGameOver() {
+        return this.$store.getters.isGameOver;
+      },
     },
 
     methods: {
       selectField(fieldId) {
         this.$store.dispatch('selectField', fieldId);
+      },
+
+      reset() {
+        this.$store.dispatch('reset');
       },
     },
   };
@@ -45,6 +60,8 @@
 
 <style scoped>
 .Board {
+  position: relative;
+
   width: 100%;
   height: 100%;
 }
@@ -61,6 +78,14 @@
   &:nth-child(7) { animation-delay: 0s; }
   &:nth-child(8) { animation-delay: 0.1s; }
   &:nth-child(9) { animation-delay: 0.2s; }
+}
+
+.Board__reset {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 @keyframes winner {
