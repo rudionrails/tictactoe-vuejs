@@ -9,21 +9,15 @@ Ensure you have the following software (globally) installed on your system:
 * [node.js](http://nodejs.org/) ^6.0.0
 * [yarn](https://yarnpkg.com/en/docs/install) ^0.16.0
 
-### Installation
+### Development
 
 ```sh
+# install dependencies
 $ yarn install
-```
 
-### Start the development server
-
-```sh
+# start the dev server
 $ yarn dev
-```
 
-### Run the test suite
-
-```sh
 # run unit tests
 $ yarn unit
 
