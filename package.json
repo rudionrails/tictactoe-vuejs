@@ -1,5 +1,5 @@
 {
-  "name": "time-tracker",
+  "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Rudolf Schmidt <me@rudionrails.com>",
@@ -10,8 +10,7 @@
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "electron": "electron src/main.js"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
     "core-js": "^2.4.1",
@@ -36,7 +35,6 @@
     "connect-history-api-fallback": "^1.1.0",
     "cross-spawn": "^4.0.2",
     "css-loader": "^0.25.0",
-    "electron-prebuilt": "^1.4.13",
     "eslint": "^3.7.1",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-friendly-formatter": "^2.0.5",
