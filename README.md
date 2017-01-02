@@ -1,27 +1,41 @@
-# time-tracker
+# TicTacToe with Vue.js
 
-> A Vue.js project
+## Installation
 
-## Build Setup
+### Prerequisites
 
-``` bash
-# install dependencies
-npm install
+Ensure you have the following software (globally) installed on your system:
 
-# serve with hot reload at localhost:8080
-npm run dev
+* [node.js](http://nodejs.org/) ^6.0.0
+* [yarn](https://yarnpkg.com/en/docs/install) ^0.16.0
 
-# build for production with minification
-npm run build
+### Installation
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+```sh
+$ yarn install
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### Start the development server
+
+```sh
+$ yarn dev
+```
+
+### Run the test suite
+
+```sh
+# run unit tests
+$ yarn unit
+
+# run e2e tests
+$ yarn e2e
+
+# run all tests
+$ yarn test
+```
+
+## Deployment
+
+```sh
+$ yarn build
+```
