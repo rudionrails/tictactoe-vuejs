@@ -1,15 +1,14 @@
 {
-  "name": "tic-tac-toe",
+  "name": "tic-tac-toe-vuejs",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Rudolf Schmidt <me@rudionrails.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "unit": "karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "start": "node build/build.js",
+    "test": "npm run test:unit",
+    "test:unit": "karma start test/unit/karma.conf.js --single-run",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
