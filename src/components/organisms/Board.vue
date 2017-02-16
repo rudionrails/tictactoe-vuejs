@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import Field from '../molecules/Field';
+  import Field from 'src/components/molecules/Field';
 
   export default {
     components: {
