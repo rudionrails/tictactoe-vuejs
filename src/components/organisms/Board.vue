@@ -68,17 +68,17 @@
 
 .Board.is-winner .Field {
   animation: winner 1.3s infinite ease-in-out;
-
-  &:nth-child(1) { animation-delay: 0.2s; }
-  &:nth-child(2) { animation-delay: 0.3s; }
-  &:nth-child(3) { animation-delay: 0.4s; }
-  &:nth-child(4) { animation-delay: 0.1s; }
-  &:nth-child(5) { animation-delay: 0.2s; }
-  &:nth-child(6) { animation-delay: 0.3s; }
-  &:nth-child(7) { animation-delay: 0s; }
-  &:nth-child(8) { animation-delay: 0.1s; }
-  &:nth-child(9) { animation-delay: 0.2s; }
 }
+
+.Board.is-winner .Field:nth-child(1) { animation-delay: 0.2s; }
+.Board.is-winner .Field:nth-child(2) { animation-delay: 0.3s; }
+.Board.is-winner .Field:nth-child(3) { animation-delay: 0.4s; }
+.Board.is-winner .Field:nth-child(4) { animation-delay: 0.1s; }
+.Board.is-winner .Field:nth-child(5) { animation-delay: 0.2s; }
+.Board.is-winner .Field:nth-child(6) { animation-delay: 0.3s; }
+.Board.is-winner .Field:nth-child(7) { animation-delay: 0s; }
+.Board.is-winner .Field:nth-child(8) { animation-delay: 0.1s; }
+.Board.is-winner .Field:nth-child(9) { animation-delay: 0.2s; }
 
 .Board__reset {
   position: absolute;

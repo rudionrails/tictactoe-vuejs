@@ -94,8 +94,8 @@ export default new Vuex.Store({
     * Select the current player on the provided field
     */
     selectField(state, fieldId) {
-      /* eslint-disable no-bitwise */
-      const matrix = state.players[state.current] | Math.pow(2, fieldId);
+      // const matrix = state.players[state.current] | Math.pow(2, fieldId); // eslint-disable-line
+      const matrix = state.players[state.current] | (2 ** fieldId);
 
       // update the current player matrix
       set(state.players, state.current, matrix);

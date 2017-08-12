@@ -39,17 +39,19 @@
 
   transform: scale(.95, .95);
   background: #333;
+}
 
-  &:hover:not(.is-player-0, .is-player-1) {
-    animation: pulsate infinite .8s ease-in-out;
-  }
+.Field:hover:not(.is-player-0, .is-player-1) {
+  animation: pulsate infinite .8s ease-in-out;
+}
 
-  &.is-player {
-    transform: scale(.9, .9);
-
-    &-0 { background: #64CEAA; }
-    &-1 { background: #FD6C6C; }
-  }
+.Field.is-player-0 {
+  transform: scale(.9, .9);
+  background: #64CEAA;
+}
+.Field.is-player-1 {
+  transform: scale(.9, .9);
+  background: #FD6C6C;
 }
 
 @keyframes pulsate {
