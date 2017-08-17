@@ -4,8 +4,9 @@
     :class="cssClass"
   >
     <Field
-      v-for="(selected, id) in fields"
-      :selected="selected"
+      v-for="(field, id) in fields"
+      :key="id"
+      :selected="field"
       @click="selectField(id)"
     />
 

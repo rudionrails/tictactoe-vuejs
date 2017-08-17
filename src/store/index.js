@@ -1,4 +1,4 @@
-import Vue, { set } from 'vue';
+import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -98,17 +98,17 @@ export default new Vuex.Store({
       const matrix = state.players[state.current] | (2 ** fieldId);
 
       // update the current player matrix
-      set(state.players, state.current, matrix);
+      Vue.set(state.players, state.current, matrix);
 
       // set the field
-      set(state.fields, fieldId, state.current);
+      Vue.set(state.fields, fieldId, state.current);
     },
 
     /**
     * Switch the current player
     */
     switchPlayer(state) {
-      set(state, 'current', Math.abs(state.current - 1));
+      Vue.set(state, 'current', Math.abs(state.current - 1));
     },
 
     /**
@@ -137,8 +137,8 @@ export default new Vuex.Store({
     * Reset the board
     */
     reset({ commit, state }) {
-      set(state, 'players', Array(2).fill(EMPTY_FIELD));
-      set(state, 'fields', Array(9).fill());
+      Vue.set(state, 'players', Array(2).fill(EMPTY_FIELD));
+      Vue.set(state, 'fields', Array(9).fill());
 
       commit('switchPlayer');
     },
