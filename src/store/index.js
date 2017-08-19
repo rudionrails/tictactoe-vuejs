@@ -43,7 +43,7 @@ function reset() {
 * Is the provided player bit a winner match
 */
 function isWinner(player) {
-  /* eslint-disable no-bitwise */
+  // eslint-disable-next-line no-bitwise
   return WINNER_FIELDS.some(win => (player & win) === win);
 }
 
@@ -84,7 +84,6 @@ export default new Vuex.Store({
     */
     isGameOver(state, getters) {
       const isAllTaken = state.fields.every(field => isTaken(field));
-
       return isAllTaken || getters.isWinnerPresent;
     },
   },
@@ -94,7 +93,7 @@ export default new Vuex.Store({
     * Select the current player on the provided field
     */
     selectField(state, fieldId) {
-      // const matrix = state.players[state.current] | Math.pow(2, fieldId); // eslint-disable-line
+      // eslint-disable-next-line no-bitwise
       const matrix = state.players[state.current] | (2 ** fieldId);
 
       // update the current player matrix
@@ -110,11 +109,6 @@ export default new Vuex.Store({
     switchPlayer(state) {
       Vue.set(state, 'current', Math.abs(state.current - 1));
     },
-
-    /**
-    * Sets all fields to the winner id
-    */
-    setWinner: (state, playerId) => state.fields.fill(playerId),
   },
 
   actions: {
@@ -126,9 +120,7 @@ export default new Vuex.Store({
 
       commit('selectField', fieldId);
 
-      if (getters.isWinnerPresent) {
-        commit('setWinner', state.current);
-      } else {
+      if (!getters.isWinnerPresent) {
         commit('switchPlayer');
       }
     },
@@ -137,8 +129,10 @@ export default new Vuex.Store({
     * Reset the board
     */
     reset({ commit, state }) {
-      Vue.set(state, 'players', Array(2).fill(EMPTY_FIELD));
-      Vue.set(state, 'fields', Array(9).fill());
+      const newState = reset();
+
+      Vue.set(state, 'players', newState.players);
+      Vue.set(state, 'fields', newState.fields);
 
       commit('switchPlayer');
     },

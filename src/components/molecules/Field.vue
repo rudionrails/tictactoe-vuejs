@@ -38,6 +38,7 @@
   float: left;
 
   transform: scale(.95, .95);
+  transition: background 0.2s ease;
   background: #333;
 }
 
@@ -45,11 +46,11 @@
   animation: pulsate infinite .8s ease-in-out;
 }
 
-.Field.is-player-0 {
+.is-player-0 {
   transform: scale(.9, .9);
   background: #64CEAA;
 }
-.Field.is-player-1 {
+.is-player-1 {
   transform: scale(.9, .9);
   background: #FD6C6C;
 }

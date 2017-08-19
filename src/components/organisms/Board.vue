@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="Board"
-    :class="cssClass"
-  >
+  <div class="Board">
     <Field
       v-for="(field, id) in fields"
       :key="id"
@@ -10,53 +7,48 @@
       @click="selectField(id)"
     />
 
-    <div
-      class="Board__reset"
+    <Result
       v-if="isGameOver"
+      :winner="winner"
       @click="reset"
-    >
-    </div>
+    />
   </div>
 </template>
 
 <script>
-  import Field from 'src/components/molecules/Field';
+import Field from 'src/components/molecules/Field';
+import Result from 'src/components/molecules/Result';
 
-  export default {
-    components: {
-      Field,
+export default {
+  components: {
+    Field,
+    Result,
+  },
+
+  computed: {
+    fields() {
+      return this.$store.state.fields;
     },
 
-    computed: {
-      cssClass() {
-        const list = [];
-
-        if (this.$store.getters.isWinnerPresent) {
-          list.push('is-winner');
-        }
-
-        return list;
-      },
-
-      fields() {
-        return this.$store.state.fields;
-      },
-
-      isGameOver() {
-        return this.$store.getters.isGameOver;
-      },
+    isGameOver() {
+      return this.$store.getters.isGameOver;
     },
 
-    methods: {
-      selectField(fieldId) {
-        this.$store.dispatch('selectField', fieldId);
-      },
-
-      reset() {
-        this.$store.dispatch('reset');
-      },
+    winner() {
+      return this.$store.getters.winner;
     },
-  };
+  },
+
+  methods: {
+    selectField(fieldId) {
+      this.$store.dispatch('selectField', fieldId);
+    },
+
+    reset() {
+      this.$store.dispatch('reset');
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -65,35 +57,5 @@
 
   width: 100%;
   height: 100%;
-}
-
-.Board.is-winner .Field {
-  animation: winner 1.3s infinite ease-in-out;
-}
-
-.Board.is-winner .Field:nth-child(1) { animation-delay: 0.2s; }
-.Board.is-winner .Field:nth-child(2) { animation-delay: 0.3s; }
-.Board.is-winner .Field:nth-child(3) { animation-delay: 0.4s; }
-.Board.is-winner .Field:nth-child(4) { animation-delay: 0.1s; }
-.Board.is-winner .Field:nth-child(5) { animation-delay: 0.2s; }
-.Board.is-winner .Field:nth-child(6) { animation-delay: 0.3s; }
-.Board.is-winner .Field:nth-child(7) { animation-delay: 0s; }
-.Board.is-winner .Field:nth-child(8) { animation-delay: 0.1s; }
-.Board.is-winner .Field:nth-child(9) { animation-delay: 0.2s; }
-
-.Board__reset {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-@keyframes winner {
-  0%, 70%, 100% {
-    transform: scale(.9, .9);
-  } 35% {
-    transform: scale(0, 0);
-  }
 }
 </style>
