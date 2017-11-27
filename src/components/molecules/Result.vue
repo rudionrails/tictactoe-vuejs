@@ -6,14 +6,14 @@
     <div class="is-left"></div>
     <div class="is-right"></div>
 
-    <div class="Result-message">
+    <div class="message">
       <div :class="winnerClass">
         {{message}}
       </div>
     </div>
 
-    <div class="Result-hint">
-      Click to restart
+    <div class="hint">
+      Click anywhere to restart
     </div>
   </div>
 </template>
@@ -53,21 +53,9 @@
 </script>
 
 <style scoped>
-@keyframes closeIn {
+@keyframes resultIn {
   to {
     transform: translateX(0);
-  }
-}
-
-@keyframes bounceDown {
-  0% {
-    transform: translateY(-100%);
-  }
-  20% {
-    transform: translateY(3rem);
-  }
-  40%, 100% {
-    transform: translateY(0);
   }
 }
 
@@ -79,44 +67,12 @@
   left: 0;
 }
 
-.Result-message {
-  animation: bounceDown 2s forwards 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0%;
-
-  text-align: center;
-  transform: translateY(-100%);
-}
-
-.Result-message > div {
-  background: #ccc;
-  color: #fff;
-
-  padding: 2rem 5rem;
-}
-
-.Result-message > .is-player-0 {
-  background: #64CEAA;
-}
-.Result-message > .is-player-1 {
-  background: #FD6C6C;
-}
-
-
 .is-left,
 .is-right {
-  animation: closeIn 0.2s forwards ease;
+  animation: resultIn 0.2s forwards ease;
 
-  background: #fff;
+  background: rgba(255, 255, 255, 0.7);
   bottom: 0;
-  opacity: 0.7;
   position: absolute;
   top: 0;
 }
@@ -135,4 +91,58 @@
   transform: translateX(100%);
 }
 
+/*
+* Winner message
+*/
+@keyframes messageIn {
+  0% {
+    transform: translateY(-100%);
+  }
+  20% {
+    transform: translateY(3rem);
+  }
+  40%, 100% {
+    transform: translateY(0);
+  }
+}
+
+.message {
+  animation: messageIn 2s forwards 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0%;
+
+  text-align: center;
+  transform: translateY(-100%);
+}
+
+.message > div {
+  background: #333;
+  color: #fff;
+
+  padding: 2rem 5rem;
+}
+
+.message > .is-player-0 {
+  background: #64CEAA;
+}
+.message > .is-player-1 {
+  background: #FD6C6C;
+}
+
+/*
+* Reset hint
+*/
+@keyframes hintIn {
+}
+
+.hint {
+  align-self: flex-end;
+}
 </style>
